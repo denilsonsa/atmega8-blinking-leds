@@ -1,33 +1,60 @@
-TAVRASM = tavrasm
+### Project configuration ###
 
-MCU = atmega8
-PROGRAMMER_MCU = atmega8
-AVRDUDE_PROGRAMMERID = bsd
-AVRDUDE_PORT = /dev/parport0
-
-
+# The main project file (without extension)
 PROGNAME = hello
 
+
+### Microcontroller and programmer configuration ###
+
+# $(MCU) is passed to GCC
+MCU = atmega8
+
+# $(PROGRAMMER_MCU) is passed to avrdude
+PROGRAMMER_MCU = atmega8
+
+# For parallel port programmer:
+#AVRDUDE_PARAMS = -p $(PROGRAMMER_MCU) -c bsd -P /dev/parport0 -E noreset
+# For USBasp
+AVRDUDE_PARAMS = -p $(PROGRAMMER_MCU) -c usbasp
+
+
+### Compiling tools configuration ###
+
+TAVRASM = tavrasm
+
+
+### Make targets ###
+
 #Basic rules
-.PHONY: all clean erase dump uisp-dump
+.PHONY: all help clean writeflash writeeeprom erase dump
+
 all: $(PROGNAME).hex
+
+help:
+	@echo 'make all         - Build the project'
+	@echo 'make clean       - Deletes all built files'
+	@echo
+	@echo 'make writeflash  - Writes the flash memory of the microcontroller'
+	@echo 'make writeeeprom - Writes the EEPROM of the microcontroller'
+	@echo 'make erase       - Perform a chip erase'
+	@echo 'make dump        - Dumps all memory from the microcontroller'
 
 clean:
 	rm -f $(PROGNAME).{hex,eep,lst}
 
-program:
-	avrdude -p $(PROGRAMMER_MCU) -c $(AVRDUDE_PROGRAMMERID) -P $(AVRDUDE_PORT) \
-		-E noreset \
+writeflash:
+	avrdude $(AVRDUDE_PARAMS) \
 		-U flash:w:$(PROGNAME).hex:i
-#		-U eeprom:w:$(PROGNAME).eep:i
-# If you uncommented the previous line, remember to add a backslash at the end of the line before it.
-	@echo Note: EEPROM was not written.
+
+writeeeprom:
+	avrdude $(AVRDUDE_PARAMS) \
+		-U eeprom:w:$(PROGNAME).eep:i
+
 erase:
-	avrdude -p $(PROGRAMMER_MCU) -c $(AVRDUDE_PROGRAMMERID) -P $(AVRDUDE_PORT) \
-		-E noreset -e
+	avrdude $(AVRDUDE_PARAMS) \
+		-e
 dump:
-	avrdude -p $(PROGRAMMER_MCU) -c $(AVRDUDE_PROGRAMMERID) -P $(AVRDUDE_PORT) \
-		-E noreset \
+	avrdude $(AVRDUDE_PARAMS) \
 		-U flash:r:flash.dump:i \
 		-U eeprom:r:eeprom.dump:i \
 		-U hfuse:r:hfuse.dump:b \
@@ -35,14 +62,9 @@ dump:
 		-U lock:r:lock.dump:b \
 		-U signature:r:signature.dump:h
 
-# I like avrdude, it's so simple and powerful.
-# So, I'm making no effort to make uisp work.
-# But the next command makes a firmware dump using uisp.
-uisp-dump:
-	uisp -dprog=bsd -dpart=atmega8 -dlpt=/dev/parport0 --rd_fuses --download of=uisp.dump
-
 
 $(PROGNAME).hex: $(PROGNAME).asm
+
 
 #The variables:
 # $@ - The name of the target of the rule.
