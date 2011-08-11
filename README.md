@@ -12,8 +12,8 @@ Quick description of the files:
 
 For full details, please read the posts in my blog:
 
-* [First contact with ATmega8 microcontroller](http://my.opera.com/CrazyTerabyte/blog/2007/10/25/first-contact-with-atmega8-microcontroller-part-1)
-* http://my.opera.com/CrazyTerabyte/blog/index.dml/tag/avr
+* [First contact with ATmega8 microcontroller (part 1)](http://my.opera.com/CrazyTerabyte/blog/2007/10/25/first-contact-with-atmega8-microcontroller-part-1)
+* [Posts tagged with "avr"](http://my.opera.com/CrazyTerabyte/blog/index.dml/tag/avr)
 
 
 [atmega8]: http://www.atmel.com/dyn/products/product_card.asp?part_id=2004
