@@ -12,7 +12,7 @@ Quick description of the files:
 
 For full details, please read the posts in my blog:
 
-* http://my.opera.com/CrazyTerabyte/blog/2007/10/25/first-contact-with-atmega8-microcontroller-part-1
+* [First contact with ATmega8 microcontroller](http://my.opera.com/CrazyTerabyte/blog/2007/10/25/first-contact-with-atmega8-microcontroller-part-1)
 * http://my.opera.com/CrazyTerabyte/blog/index.dml/tag/avr
 
 
