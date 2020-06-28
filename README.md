@@ -12,7 +12,7 @@ Quick description of the files:
 
 For full details, please read the posts in my blog:
 
-* [First contact with ATmega8 microcontroller (part 1)](http://denilson.sa.nom.br/blog/2007-10-25/first-contact-with-atmega8-microcontroller-part-1/)
+* [First contact with ATmega8 microcontroller (part 1)](http://denilson.sa.nom.br/blog/2007-10-25/first-contact-with-atmega8-microcontroller-part-1)
 
 [atmega8]: http://www.atmel.com/dyn/products/product_card.asp?part_id=2004
 [avr]: http://en.wikipedia.org/wiki/Atmel_AVR
